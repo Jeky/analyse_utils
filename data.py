@@ -1,14 +1,17 @@
 from collections import Counter
 
-DATA_PATH = ''
+DATA_PATH = '/Volumes/Time Machine/jeky/twitter/'
 
-GRAPH_FILE = DATA_PATH + ''
-GRAPH_MAP = DATA_PATH + ''
-RW_PATH = DATA_PATH + ''
+GRAPH_FILE = DATA_PATH + 'twitter-encode.graph'
+GRAPH_MAP = DATA_PATH + 'twitter.map'
+RW_PATH = DATA_PATH + 'rw/'
 
-VAR_FILE = DATA_PATH + ''
-BIAS_FILE = DATA_PATH + ''
-DEG_FILE = DATA_PATH + ''
+VAR_FILE = DATA_PATH + 'twitter.var'
+BIAS_FILE = DATA_PATH + 'twitter.bias'
+DEG_FILE = DATA_PATH + 'twitter-deg.list'
+
+
+
 
 def getRank(tid, idList):
     ranker = Counter()
