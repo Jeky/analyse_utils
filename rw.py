@@ -8,7 +8,7 @@ def loadRWData(jp, index = None):
         rw = []
 
         for i in range(COUNT):
-            rw += loadSingleRWData(jp, index)
+            rw += loadSingleRWData(jp, i)
 
         return rw
     else:

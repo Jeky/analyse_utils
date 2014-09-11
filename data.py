@@ -6,11 +6,8 @@ GRAPH_FILE = DATA_PATH + 'twitter-encode.graph'
 GRAPH_MAP = DATA_PATH + 'twitter.map'
 RW_PATH = DATA_PATH + 'rw/'
 
-VAR_FILE = DATA_PATH + 'twitter.var'
-BIAS_FILE = DATA_PATH + 'twitter.bias'
+OUTPUT_FILE = DATA_PATH + 'twitter.output'
 DEG_FILE = DATA_PATH + 'twitter-deg.list'
-
-
 
 
 def getRank(tid, idList):

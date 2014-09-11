@@ -13,7 +13,9 @@ def loadDegData(count = 0):
             f.close()
             return idList
 
-        idList.append(int(l.strip()))
+        tid, inDeg, outDeg = l.strip().split('\t')
+
+        idList.append(int(tid))
 
     f.close()
     return idList
