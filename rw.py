@@ -8,22 +8,19 @@ def loadRWData(jp, index = None):
         rw = []
 
         for i in range(COUNT):
-            rw += loadSingleRWData(jp, i)
+            loadSingleRWData(rw, jp, i)
 
         return rw
     else:
         return loadSingleRWData(jp, index)
 
-def loadSingleRWData(jp, index):
-    rw = []
 
+def loadSingleRWData(rw, jp, index):
     f = open(RW_DATA_FILE % (int(jp * 100), index))
-    print 'Loading', f
-    for i, l in enumerate(f.xreadlines()):
+    print 'Loading', RW_DATA_FILE % (int(jp * 100), index)
+
+    for l in f.xreadlines():
         tid, tag = l.strip().split('\t')
-        rw.append({
-                'id' : tid,
-                'tag': tag
-            })
+        rw.append(int(tid))
 
     f.close()

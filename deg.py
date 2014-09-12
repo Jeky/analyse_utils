@@ -6,7 +6,7 @@ def loadDegData(count = 0):
 
     idList = []
     for i, l in enumerate(f.xreadlines()):
-        if i % 1000000 == 0:
+        if i % 100000 == 0:
             print 'read', i, 'lines'
 
         if count and i == count:

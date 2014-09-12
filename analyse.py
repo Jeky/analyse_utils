@@ -2,13 +2,14 @@ import rw
 import data
 import deg
 
-def analyse(data, rank, tid, size, count):
+def analyse(rwData, rank, tid, size, count):
     '''
     This function will return two variance values and two bias value:
         v1 using real mean, v2 using real rank
         b1 using real mean, b2 using real rank
     '''
     rankList = []
+    rank += 1
     v1 = 0.0
     v2 = 0.0
     mean = 0.0
@@ -16,7 +17,7 @@ def analyse(data, rank, tid, size, count):
     b2 = 0.0
 
     for i in range(count):
-        rankList.append(data.getRank(tid, [d['id'] for d in data[size * i: size * (i + 1)]]))
+        rankList.append(1 + data.getRank(tid, rwData[size * i: size * (i + 1)]))#[d['id'] for d in rwData[size * i: size * (i + 1)]]))
 
     for r in rankList:
         mean += r
@@ -29,6 +30,8 @@ def analyse(data, rank, tid, size, count):
 
     v1 /= count
     v2 /= count
+
+    b1 = (mean - rank) / rank
 
     return v1, v2, b1, b2
 
@@ -43,14 +46,15 @@ if __name__ == '__main__':
     idList = deg.loadDegData(100)
 
     for jp in JP_LIST:
-        data = rw.loadRWData(jp)
+        rwData = rw.loadRWData(jp)
 
         for rank in RANK_LIST:
             tid = idList[rank]
 
             for size in SIZE_LIST:
-                v1, v2, b1, b2 = analyse(data, rank, tid, size, COUNT)
-                varOut.write('%0.2f, %d , %d  , %d  , %lf, %lf, %lf, %lf\n' %\
+                print 'Analysing...JP =', jp, ', Rank =', rank, ', Size =', size
+                v1, v2, b1, b2 = analyse(rwData, rank, tid, size, COUNT)
+                varOut.write('%0.2f,%d,%d,%d,%lf,%lf,%lf,%lf\n' %\
                              (jp   , tid, rank, size, v1 , v2 , b1 , b2))
 
     varOut.close()
