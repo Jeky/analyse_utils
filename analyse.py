@@ -1,6 +1,7 @@
 import rw
 import data
 import deg
+import numpy
 
 def analyse(rwData, rank, tid, size, count):
     '''
@@ -17,7 +18,9 @@ def analyse(rwData, rank, tid, size, count):
     b2 = 0.0
 
     for i in range(count):
-        rankList.append(1 + data.getRank(tid, rwData[size * i: size * (i + 1)]))#[d['id'] for d in rwData[size * i: size * (i + 1)]]))
+        r = data.getRank(tid, rwData, size * i, size * (i + 1))
+        if r != -1:
+            rankList.append(1 + r)
 
     for r in rankList:
         mean += r
@@ -33,16 +36,17 @@ def analyse(rwData, rank, tid, size, count):
 
     b1 = (mean - rank) / rank
 
-    return v1, v2, b1, b2
+    return v1, v2, b1, b2, rankList
 
 
 if __name__ == '__main__':
     JP_LIST = [0.01 * i for i in range(1, 21)]
     RANK_LIST = range(20)
     SIZE_LIST = [1000, 5000, 10000, 50000, 100000, 500000, 1000000]
-    COUNT = 1000
+    COUNT = 100
 
     varOut = open(data.OUTPUT_FILE, 'w')
+    rankListOut = open(data.RANK_LIST_FILE, 'w')
     idList = deg.loadDegData(100)
 
     for jp in JP_LIST:
@@ -53,8 +57,13 @@ if __name__ == '__main__':
 
             for size in SIZE_LIST:
                 print 'Analysing...JP =', jp, ', Rank =', rank, ', Size =', size
-                v1, v2, b1, b2 = analyse(rwData, rank, tid, size, COUNT)
+                v1, v2, b1, b2, rankList = analyse(rwData, rank, tid, size, COUNT)
                 varOut.write('%0.2f,%d,%d,%d,%lf,%lf,%lf,%lf\n' %\
                              (jp   , tid, rank, size, v1 , v2 , b1 , b2))
+                varOut.flush()
+
+                rankListOut.write('%s\n' % ','.join([str(i) for i in rankList]))
+                rankListOut.flush()
 
     varOut.close()
+    rankListOut.close()
