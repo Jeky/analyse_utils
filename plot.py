@@ -53,8 +53,8 @@ if __name__ == '__main__':
         for rank in range(20):
             result = select(output, [lambda c : c[3] == size, lambda c : c[2] == rank], [0, 4])
             printPlotScript(result, '/Volumes/Time Machine/jeky/twitter/rw_result/jp-var.m', 'JP', 'VAR')
-            # result = select(output, [lambda c : c[3] == size, lambda c : c[2] == rank], [0, 5])
-            # result = select(output, [lambda c : c[3] == size, lambda c : c[2] == rank], [0, 6])
+            result = select(output, [lambda c : c[3] == size, lambda c : c[2] == rank], [0, 6])
+            printPlotScript(result, '/Volumes/Time Machine/jeky/twitter/rw_result/jp-var.m', 'JP', 'BIAS')
 
 
 
