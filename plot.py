@@ -38,10 +38,13 @@ def select(output, conditionList, indexList):
 
 def printPlotScript(result, outputFile, xlabel, ylabel):
     fout = open(outputFile, 'w')
-    fout.write('data=[%s];\n' % ';'.join([','.join(str(r)) for r in result]))
-    fout.write('plot(data(:,1), data(:,2));\n')
-    fout.write('xlabel(%s);\n' % xlabel)
-    fout.write('ylable(%s);\n' % ylabel)
+    fout.write('data=[')
+    for r in result:
+        fout.write('%s;\n' % ','.join([str(i) for i in r]))
+    fout.write('];')
+    fout.write('plot(data(:,1), log(data(:,2)));\n')
+    fout.write('xlabel(\'%s\');\n' % xlabel)
+    fout.write('ylabel(\'%s\');\n' % ylabel)
 
     fout.close()
 
@@ -52,9 +55,9 @@ if __name__ == '__main__':
     for size in [10 ** 3, 10 ** 4, 10 ** 5]:
         for rank in range(20):
             result = select(output, [lambda c : c[3] == size, lambda c : c[2] == rank], [0, 4])
-            printPlotScript(result, '/Volumes/Time Machine/jeky/twitter/rw_result/jp-var.m', 'JP', 'VAR')
+            printPlotScript(result, '/Volumes/Time Machine/jeky/twitter/rw_result/jp_var_s%d_r%d.m' % (size, rank), 'JP', 'VAR')
             result = select(output, [lambda c : c[3] == size, lambda c : c[2] == rank], [0, 6])
-            printPlotScript(result, '/Volumes/Time Machine/jeky/twitter/rw_result/jp-var.m', 'JP', 'BIAS')
+            printPlotScript(result, '/Volumes/Time Machine/jeky/twitter/rw_result/jp_bias_s%d_r%d.m' % (size, rank), 'JP', 'BIAS')
 
 
 
