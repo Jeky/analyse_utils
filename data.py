@@ -1,6 +1,6 @@
 from collections import Counter
 
-DATA_PATH = '/Volumes/Time Machine/jeky/twitter/'
+DATA_PATH = '/Users/Jeky/data/twitter/'
 
 GRAPH_FILE = DATA_PATH + 'twitter-encode.graph'
 GRAPH_MAP = DATA_PATH + 'twitter.map'
