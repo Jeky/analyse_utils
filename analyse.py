@@ -91,11 +91,11 @@ def analyse(rwData, rank, tid, size, count):
 
 
 if __name__ == '__main__':
-    idList = deg.loadDegData()
+    degRankList = deg.loadDegData()
     rankList = loadRankData(100)
     f = open('pr-deg.list', 'w')
     for r in rankList:
-        degRank = data.getRank(r, idList, 0, len(idList))
+        degRank = degRankList.index(r)
         f.write('%d,%d\n' % (r, degRank))
 
     f.close()
