@@ -8,7 +8,7 @@ RW_PATH = DATA_PATH + 'rw/'
 
 OUTPUT_FILE = DATA_PATH + 'twitter.output'
 DEG_FILE = DATA_PATH + 'twitter-deg.list'
-RANK_LIST_FILE = DATA_PATH + 'twitter.ranklist'
+RANK_LIST_FILE = DATA_PATH + 'twitter-pagerank-15.list'
 
 
 def getRank(tid, idList, start, end):

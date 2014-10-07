@@ -41,9 +41,9 @@ def printPlotScript(result, outputFile, xlabel, ylabel, isLogX = False, isLogY =
     fout.write('data=[')
     for r in result:
         fout.write('%s;\n' % ','.join([str(i) for i in r]))
-    fout.write('];')
+    fout.write('];\n')
     if isLogX and isLogY:
-        fout.write('plot(log(data(:,1)), log(data(:,2)), \'x-\');\n')
+        fout.write('loglog(data(:,1), data(:,2), \'x-\');\n')
     elif isLogX:
         fout.write('plot(log(data(:,1)), data(:,2), \'x-\');\n')
     elif isLogY:
