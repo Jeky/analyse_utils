@@ -60,42 +60,31 @@ def analyse(rwData, rank, tid, size, count):
     return v1, v2, b1, b2, rankList
 
 
-# if __name__ == '__main__':
-#     JP_LIST = [0.01 * i for i in range(1, 21)]
-#     RANK_LIST = range(20)
-#     SIZE_LIST = [1000, 5000, 10000, 50000, 100000, 500000, 1000000]
-#     COUNT = 100
-
-#     varOut = open(data.OUTPUT_FILE, 'w')
-#     rankListOut = open(data.RANK_LIST_FILE, 'w')
-#     idList = deg.loadDegData(100)
-
-#     for jp in JP_LIST:
-#         rwData = rw.loadRWData(jp)
-
-#         for rank in RANK_LIST:
-#             tid = idList[rank]
-
-#             for size in SIZE_LIST:
-#                 print 'Analysing...JP =', jp, ', Rank =', rank, ', Size =', size
-#                 v1, v2, b1, b2, rankList = analyse(rwData, rank, tid, size, COUNT)
-#                 varOut.write('%0.2f,%d,%d,%d,%lf,%lf,%lf,%lf\n' %\
-#                              (jp   , tid, rank, size, v1 , v2 , b1 , b2))
-#                 varOut.flush()
-
-#                 rankListOut.write('%s\n' % ','.join([str(i) for i in rankList]))
-#                 rankListOut.flush()
-
-#     varOut.close()
-#     rankListOut.close()
-
-
 if __name__ == '__main__':
-    degRankList = deg.loadDegData()
-    rankList = loadRankData(100)
-    f = open('pr-deg.list', 'w')
-    for r in rankList:
-        degRank = degRankList.index(r)
-        f.write('%d,%d\n' % (r, degRank))
+    JP_LIST = [0.15] #[0.01 * i for i in range(1, 21)]
+    RANK_LIST = range(20)
+    SIZE_LIST = [1000, 5000, 10000, 50000, 100000, 500000, 1000000]
+    COUNT = 100
 
-    f.close()
+    varOut = open(data.OUTPUT_FILE, 'w')
+    rankListOut = open(data.RANK_LIST_FILE, 'w')
+    idList = deg.loadDegData(100)
+
+    for jp in JP_LIST:
+        rwData = rw.loadRWData(jp)
+
+        for rank in RANK_LIST:
+            tid = idList[rank]
+
+            for size in SIZE_LIST:
+                print 'Analysing...JP =', jp, ', Rank =', rank, ', Size =', size
+                v1, v2, b1, b2, rankList = analyse(rwData, rank, tid, size, COUNT)
+                varOut.write('%0.2f,%d,%d,%d,%lf,%lf,%lf,%lf\n' %\
+                             (jp   , tid, rank, size, v1 , v2 , b1 , b2))
+                varOut.flush()
+
+                rankListOut.write('%s\n' % ','.join([str(i) for i in rankList]))
+                rankListOut.flush()
+
+    varOut.close()
+    rankListOut.close()
